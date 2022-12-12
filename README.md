@@ -47,3 +47,10 @@ Front-end escrito em React.
 
 ## Functions
 Caso precise criar alguma função extra não coberta pelo Firestore.
+
+# Como instalar pacotes (NPM)
+
+Utilizar o comando _add_ do Lerna:
+```sh
+lerna add firebase --scope=@listly/webapp
+```
