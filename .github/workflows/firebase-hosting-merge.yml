@@ -20,7 +20,7 @@ jobs:
       - name: Lerna Bootstrap
         run: lerna bootstrap
 
-      - uses: actions/checkout@v2
+      - name: "Build Webapp"
       - run: lerna run build --scope=@listly/webapp
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
