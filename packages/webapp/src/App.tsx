@@ -15,6 +15,7 @@ import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import SignInPage from "./pages/auth/signin";
 import SignUpPage from "./pages/auth/signup";
 
+// Set up router
 const router = createBrowserRouter([
   { path: "/", element: <HomePage /> },
   { path: "/auth/signin", element: <SignInPage /> },
