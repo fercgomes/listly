@@ -21,7 +21,7 @@ jobs:
         run: lerna bootstrap
 
       - name: "Build Webapp"
-      - run: lerna run build --scope=@listly/webapp
+        run: lerna run build --scope=@listly/webapp
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
