@@ -2,9 +2,9 @@
   "name": "listly",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "backend": "firebase emulators:start --import .firebasedata --export-on-exit",
+    "frontend:dev": "lerna run start --scope=@listly/webapp"
   },
   "author": "",
   "license": "ISC",

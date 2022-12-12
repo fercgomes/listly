@@ -1,0 +1,22 @@
+{
+    "folders": [
+      {
+        "name": "root",
+        "path": "."
+      },
+      {
+        "name": "webapp",
+        "path": "packages/webapp"
+      },
+      {
+        "name": "functions",
+        "path": "packages/functions"
+      }
+    ],
+    "settings": {
+      "files.exclude": {
+        "**/node_modules/**": true,
+        "packages/*/*": true
+      }
+    }
+  }
