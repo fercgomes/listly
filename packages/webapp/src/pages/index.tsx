@@ -1,41 +1,47 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useSigninCheck } from "reactfire";
-import { useAuth } from "reactfire";
+import { Button } from "@mui/material";
+import { Box } from "@mui/system";
+import { useNavigate, useNavigation } from "react-router-dom";
 
 const HomePage = () => {
-  const { status, data: signInCheckResult } = useSigninCheck();
-  const auth = useAuth();
+  const navigate = useNavigate();
 
-  if (status === "loading") {
-    return <span>loading...</span>;
-  }
-
-  const signedIn = signInCheckResult.signedIn;
-
-  const logoutHandler = () => {
-    auth.signOut();
+  const signInClickHandler = () => {
+    navigate("/auth/signin");
   };
 
-  const { currentUser } = auth;
+  const signUpClickHandler = () => {
+    navigate("/auth/signup");
+  };
 
   return (
-    <div>
-      <h1>Listly</h1>
-      <p>Suas listas de compras!</p>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "space-between",
+        margin: 3,
+      }}
+    >
+      <Button
+        variant="outlined"
+        color="primary"
+        sx={{ width: 200, margin: 1 }}
+        onClick={signInClickHandler}
+      >
+        Entrar
+      </Button>
 
-      {signedIn ? (
-        <>
-          <p>Bem-vindo, {currentUser!.email}!</p>
-          <button onClick={logoutHandler}>Sair</button>
-        </>
-      ) : (
-        <>
-          <Link to="/auth/signin">Logar</Link>
-          <Link to="/auth/signup">Criar conta</Link>
-        </>
-      )}
-    </div>
+      <Button
+        variant="contained"
+        color="info"
+        sx={{ width: 200, margin: 1 }}
+        onClick={signUpClickHandler}
+      >
+        Criar conta
+      </Button>
+    </Box>
   );
 };
 

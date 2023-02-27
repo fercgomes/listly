@@ -7,6 +7,8 @@ import {
   FunctionsProvider,
   FirestoreProvider,
   useFirebaseApp,
+  useAuth,
+  useSigninCheck,
 } from "reactfire";
 import { firebaseConfig } from "./firebase";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
@@ -14,13 +16,81 @@ import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { getFunctions, connectFunctionsEmulator } from "firebase/functions";
 import SignInPage from "./pages/auth/signin";
 import SignUpPage from "./pages/auth/signup";
+import { NativeBaseProvider } from "native-base";
+import { extendTheme } from "native-base";
+import Layout from "./components/Layout";
+import Dashboard from "./pages/dashboard";
+import ListCreatePage from "./pages/lists/create";
+import ListShowPage from "./pages/lists/show";
 
-// Set up router
-const router = createBrowserRouter([
-  { path: "/", element: <HomePage /> },
-  { path: "/auth/signin", element: <SignInPage /> },
-  { path: "/auth/signup", element: <SignUpPage /> },
-]);
+// Theming
+const theme = extendTheme({
+  fontConfig: {
+    Alegreya: {
+      400: {
+        normal: "Alegreya",
+      },
+      500: {
+        normal: "Alegreya",
+      },
+      600: {
+        normal: "Alegreya",
+      },
+      700: {
+        normal: "Alegreya",
+      },
+      800: {
+        normal: "Alegreya",
+      },
+      900: {
+        normal: "Alegreya",
+      },
+    },
+  },
+  fonts: {
+    heading: "Alegreya",
+    body: "Alegreya",
+    mono: "Alegreya",
+  },
+  colors: {},
+});
+
+const Router = () => {
+  const { status, data: signInCheckResult } = useSigninCheck();
+
+  if (status === "loading") {
+    return <></>;
+  }
+
+  const isAuth = signInCheckResult.signedIn;
+  console.info(`isAuth=${isAuth}`);
+
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Layout />,
+      children: isAuth
+        ? [{ path: "/", element: <Dashboard /> }]
+        : [{ path: "/", element: <HomePage /> }],
+    },
+    { path: "/auth/signin", element: <SignInPage /> },
+    { path: "/auth/signup", element: <SignUpPage /> },
+    {
+      path: "lists",
+      element: <Layout />,
+      children: [
+        { path: "create", element: <ListCreatePage /> },
+        { path: ":listId", element: <ListShowPage /> },
+      ],
+    },
+  ]);
+
+  return (
+    <>
+      <RouterProvider router={router} />
+    </>
+  );
+};
 
 const FirebaseComponents = (props: React.PropsWithChildren<any>) => {
   const { children } = props;
@@ -58,7 +128,9 @@ function App() {
   return (
     <FirebaseAppProvider firebaseConfig={firebaseConfig}>
       <FirebaseComponents>
-        <RouterProvider router={router} />
+        <NativeBaseProvider theme={theme}>
+          <Router />
+        </NativeBaseProvider>
       </FirebaseComponents>
     </FirebaseAppProvider>
   );
