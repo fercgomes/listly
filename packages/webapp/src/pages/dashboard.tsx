@@ -1,40 +1,25 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import {
   useFirestore,
-  useFirestoreCollection,
   useFirestoreCollectionData,
   useSigninCheck,
   useUser,
 } from "reactfire";
-import { useAuth } from "reactfire";
 import { useNavigate } from "react-router-dom";
-import {
-  addDoc,
-  collection,
-  doc,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { addDoc, collection, orderBy, query, where } from "firebase/firestore";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import Button from "@mui/material/Button";
 import AddIcon from "@mui/icons-material/Add";
-import IconButton from "@mui/material/IconButton";
 import Fab from "@mui/material/Fab";
 import NewListDialog, { CreateListForm } from "../components/NewListDialog";
-import { createList } from "../lib/lists";
 import { CardActionArea } from "@mui/material";
 
 const Dashboard = () => {
   const navigate = useNavigate();
-  const { status, data: signInCheckResult } = useSigninCheck();
-  const auth = useAuth();
+  const { status } = useSigninCheck();
   const user = useUser();
 
   const [createListDialogOpen, setCreateListDialogOpen] = React.useState(false);

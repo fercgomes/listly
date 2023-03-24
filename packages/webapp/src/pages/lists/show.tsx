@@ -2,12 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { useFirestore, useFirestoreDocData, useUser } from "reactfire";
-import {
-  CircularProgress,
-  TextField,
-  IconButton,
-  Divider,
-} from "@mui/material";
+import { CircularProgress, IconButton, Divider } from "@mui/material";
 import {
   Firestore,
   deleteDoc,
@@ -18,7 +13,6 @@ import {
 import AddIcon from "@mui/icons-material/Add";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import { List } from "../../types";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ShareIcon from "@mui/icons-material/Share";
 import ShareListDialog from "../../components/ShareListDialog";
@@ -68,8 +62,7 @@ const ListShowPage = () => {
   const [showShareDialog, setShowShareDialog] = useState(false);
   const { data: user } = useUser();
 
-  const { register, handleSubmit, reset, watch, setValue } =
-    useForm<NewItemInput>();
+  const { register, handleSubmit, reset, setValue } = useForm<NewItemInput>();
 
   const {
     status: listStatus,

@@ -2,16 +2,12 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useFirestore, useFirestoreDocData } from "reactfire";
-import { collection, doc } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 
 const filter = createFilterOptions<string[]>();
 
 export default function ListItemInput(props: any) {
-  const [open, setOpen] = React.useState(false);
-
-  const { userId, ...inputParams } = props;
-
   const firestore = useFirestore();
   const userSuggestionsDoc = doc(firestore, "userSuggestions", props.userId);
 

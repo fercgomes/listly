@@ -1,9 +1,6 @@
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import ListItemText from "@mui/material/ListItemText";
-import ListItem from "@mui/material/ListItem";
-import List from "@mui/material/List";
 import Divider from "@mui/material/Divider";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,10 +9,7 @@ import Typography from "@mui/material/Typography";
 import CloseIcon from "@mui/icons-material/Close";
 import Slide from "@mui/material/Slide";
 import { TransitionProps } from "@mui/material/transitions";
-import { useForm } from "react-hook-form";
 import { Box } from "@mui/system";
-import TextField from "@mui/material/TextField";
-import { ListShareStatus } from "../types";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 
 const Transition = React.forwardRef(function Transition(
@@ -27,7 +21,7 @@ const Transition = React.forwardRef(function Transition(
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-interface ShareListDialog {
+interface ShareListDialogProps {
   show?: boolean;
   onDismiss: () => void;
   sharedWith: string[];
@@ -44,7 +38,7 @@ const makeLink = (code: string) =>
     ? `https://listly.fcgomes.dev/share/${code}`
     : `http://localhost:3000/share/${code}`;
 
-export default function ShareListDialog(props: ShareListDialog) {
+export default function ShareListDialog(props: ShareListDialogProps) {
   const { show, onDismiss, onCreateLink, shareLinks, sharedWith } = props;
 
   const copyToClipboardHandler = async (item: string) => {

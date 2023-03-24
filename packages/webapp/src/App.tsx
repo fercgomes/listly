@@ -7,8 +7,6 @@ import {
   FunctionsProvider,
   FirestoreProvider,
   useFirebaseApp,
-  useAuth,
-  useSigninCheck,
 } from "reactfire";
 import { firebaseConfig } from "./firebase";
 import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
@@ -23,7 +21,6 @@ import Dashboard from "./pages/dashboard";
 import ListCreatePage from "./pages/lists/create";
 import ListShowPage from "./pages/lists/show";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { Home } from "react-ionicons";
 import SignOutPage from "./pages/auth/signout";
 import SharePage from "./pages/share";
 

@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
-import { Button, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Box } from "@mui/system";
-import { useNavigate, useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
-  const signInClickHandler = () => {
-    navigate("/auth/signin");
-  };
+  // const signInClickHandler = () => {
+  //   navigate("/auth/signin");
+  // };
 
-  const signUpClickHandler = () => {
-    navigate("/auth/signup");
-  };
+  // const signUpClickHandler = () => {
+  //   navigate("/auth/signup");
+  // };
 
   useEffect(() => {
     navigate("/dashboard");
-  }, []);
+  }, [navigate]);
 
   return (
     <Box

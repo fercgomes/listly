@@ -1,20 +1,19 @@
 import { Box, CircularProgress } from "@mui/material";
 import { signInAnonymously } from "firebase/auth";
 import { collection, query, where } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   useAuth,
   useFirestore,
   useFirestoreCollectionData,
   useSigninCheck,
-  useUser,
 } from "reactfire";
 
 const SharePage = () => {
   const { code } = useParams();
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
   const { data: signInCheck, status: signInStatus } = useSigninCheck();
   const auth = useAuth();
 
@@ -42,7 +41,7 @@ const SharePage = () => {
         navigate(`/lists/${data[0].id}`);
       }
     }
-  }, [status, data, signInStatus]);
+  }, [status, data, signInStatus, auth, navigate, signInCheck.signedIn]);
 
   return (
     <Box>

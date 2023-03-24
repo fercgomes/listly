@@ -16,7 +16,7 @@ const SignOutPage = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [auth]);
 
   if (loading) {
     return <>Signing out...</>;

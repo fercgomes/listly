@@ -6,11 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Box, Typography, TextField } from "@mui/material";
 
 const SignInPage = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const auth = useAuth();
 
