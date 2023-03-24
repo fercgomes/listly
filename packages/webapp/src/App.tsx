@@ -22,6 +22,10 @@ import Layout from "./components/Layout";
 import Dashboard from "./pages/dashboard";
 import ListCreatePage from "./pages/lists/create";
 import ListShowPage from "./pages/lists/show";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import { Home } from "react-ionicons";
+import SignOutPage from "./pages/auth/signout";
+import SharePage from "./pages/share";
 
 // Theming
 const theme = extendTheme({
@@ -56,32 +60,57 @@ const theme = extendTheme({
 });
 
 const Router = () => {
-  const { status, data: signInCheckResult } = useSigninCheck();
-
-  if (status === "loading") {
-    return <></>;
-  }
-
-  const isAuth = signInCheckResult.signedIn;
-  console.info(`isAuth=${isAuth}`);
-
   const router = createBrowserRouter([
     {
       path: "/",
       element: <Layout />,
-      children: isAuth
-        ? [{ path: "/", element: <Dashboard /> }]
-        : [{ path: "/", element: <HomePage /> }],
+      children: [
+        {
+          path: "/",
+          element: (
+            <ProtectedRoute>
+              <HomePage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/dashboard",
+          element: (
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          ),
+        },
+      ],
     },
     { path: "/auth/signin", element: <SignInPage /> },
     { path: "/auth/signup", element: <SignUpPage /> },
+    { path: "/auth/signout", element: <SignOutPage /> },
     {
       path: "lists",
       element: <Layout />,
       children: [
-        { path: "create", element: <ListCreatePage /> },
-        { path: ":listId", element: <ListShowPage /> },
+        {
+          path: "create",
+          element: (
+            <ProtectedRoute>
+              <ListCreatePage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: ":listId",
+          element: (
+            <ProtectedRoute>
+              <ListShowPage />
+            </ProtectedRoute>
+          ),
+        },
       ],
+    },
+    {
+      path: "/share/:code",
+      element: <SharePage />,
     },
   ]);
 

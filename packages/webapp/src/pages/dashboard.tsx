@@ -29,6 +29,7 @@ import IconButton from "@mui/material/IconButton";
 import Fab from "@mui/material/Fab";
 import NewListDialog, { CreateListForm } from "../components/NewListDialog";
 import { createList } from "../lib/lists";
+import { CardActionArea } from "@mui/material";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -47,6 +48,8 @@ const Dashboard = () => {
     orderBy("updatedAt", "desc")
   );
 
+  // recurrent items
+
   const { status: listsStatus, data: listsData } = useFirestoreCollectionData(
     listsQuery,
     { idField: "id" }
@@ -64,6 +67,8 @@ const Dashboard = () => {
       createdAt: new Date(),
       updatedAt: new Date(),
       items: [],
+      sharedWith: [],
+      shareLinks: [],
     };
 
     const { id } = await addDoc(collection(firestore, "lists"), newList);
@@ -79,27 +84,31 @@ const Dashboard = () => {
     if (listsStatus === "success") {
       return (
         <>
-          {listsData.map((list) => (
-            <Card key={list.id}>
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
-                  {list.name}
-                </Typography>
+          {listsData.length === 0 ? (
+            <Box>
+              <Typography>
+                Nenhuma lista encontrada. Clique no botão abaixo para criar uma
+                lista.
+              </Typography>
+            </Box>
+          ) : (
+            listsData.map((list) => (
+              <Card key={list.id}>
+                <CardActionArea onClick={() => navigate(`/lists/${list.id}`)}>
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {list.name}
+                    </Typography>
 
-                {/* <Typography>Última modificação</Typography> */}
-              </CardContent>
-              <CardActions>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    navigate(`/lists/${list.id}`);
-                  }}
-                >
-                  Expandir
-                </Button>
-              </CardActions>
-            </Card>
-          ))}
+                    <Typography variant="subtitle1" sx={{ fontSize: 12 }}>
+                      Última modificação:{" "}
+                      {new Date(list.updatedAt.seconds * 1000).toLocaleString()}
+                    </Typography>
+                  </CardContent>
+                </CardActionArea>
+              </Card>
+            ))
+          )}
         </>
       );
     } else if (listsStatus === "loading") {

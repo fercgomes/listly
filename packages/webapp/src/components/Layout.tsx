@@ -9,6 +9,7 @@ const Layout = () => {
   return (
     <>
       <AppBar user={user} />
+
       <Container sx={{ height: "100%" }}>
         <Outlet />
       </Container>

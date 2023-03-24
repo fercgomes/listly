@@ -12,6 +12,7 @@
     "packages/*"
   ],
   "devDependencies": {
+    "@types/uuid": "^9.0.1",
     "lerna": "^6.1.0"
   },
   "dependencies": {
@@ -19,6 +20,8 @@
     "@emotion/styled": "^11.10.6",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.11.9",
-    "@mui/material": "^5.11.10"
+    "@mui/material": "^5.11.10",
+    "openai": "^3.2.1",
+    "uuid": "^9.0.0"
   }
 }

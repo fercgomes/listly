@@ -80,6 +80,7 @@ export default function NewListDialog(props: NewListDialogProps) {
         <Box sx={{ margin: 2 }}>
           <TextField
             {...register("name")}
+            autoFocus
             placeholder="Nome da lista"
             label="Nome"
             fullWidth

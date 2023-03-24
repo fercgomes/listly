@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "@mui/material";
+import React, { useEffect } from "react";
+import { Button, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import { useNavigate, useNavigation } from "react-router-dom";
 
@@ -14,6 +14,10 @@ const HomePage = () => {
     navigate("/auth/signup");
   };
 
+  useEffect(() => {
+    navigate("/dashboard");
+  }, []);
+
   return (
     <Box
       sx={{
@@ -24,23 +28,7 @@ const HomePage = () => {
         margin: 3,
       }}
     >
-      <Button
-        variant="outlined"
-        color="primary"
-        sx={{ width: 200, margin: 1 }}
-        onClick={signInClickHandler}
-      >
-        Entrar
-      </Button>
-
-      <Button
-        variant="contained"
-        color="info"
-        sx={{ width: 200, margin: 1 }}
-        onClick={signUpClickHandler}
-      >
-        Criar conta
-      </Button>
+      <Typography>Bem-vindo ao listly.</Typography>
     </Box>
   );
 };
